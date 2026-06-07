@@ -42,6 +42,8 @@ pnpm dev        # turbo dev → next dev for apps/web
 | `pnpm lint`      | ESLint across all packages            |
 | `pnpm typecheck` | Strict TypeScript across the repo     |
 | `pnpm format`    | Prettier over the repo                |
+| `pnpm test`      | Vitest unit tests across packages     |
+| `pnpm e2e`       | Playwright E2E tests (apps/web)       |
 
 Each package also exposes its own `lint` and `typecheck`, runnable with
 `pnpm --filter <package> <script>`.
@@ -74,6 +76,16 @@ Design notes:
 - Tailwind 4 aware: `cursor-pointer` applied explicitly to actionable elements
   (v4 Preflight no longer does), and consumers must `@source` the kit since
   Tailwind doesn't scan `node_modules`
+
+## Testing
+
+- **Unit: Vitest** in every package — node environment for the SDK, jsdom +
+  Testing Library for ui-kit and web. Setup files register jest-dom matchers
+  and explicit Testing Library cleanup (required without `globals: true`).
+- **E2E: Playwright** in `apps/web` (`e2e/`), with a `webServer` that boots
+  `pnpm dev` automatically. First run needs browsers: `pnpm exec playwright install chromium`.
+- Per Next.js guidance, async Server Components are not unit-tested — they
+  belong to Playwright. Sync components, hooks, and helpers go to Vitest.
 
 ## Code style
 

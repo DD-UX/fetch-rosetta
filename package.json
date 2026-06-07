@@ -9,6 +9,8 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "e2e": "turbo e2e",
     "format": "prettier --write ."
   },
   "devDependencies": {
