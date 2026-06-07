@@ -36,7 +36,7 @@ export function Select({
         aria-describedby={errorId}
         defaultValue={defaultValue ?? (placeholder ? "" : undefined)}
         className={cn(
-          "h-10 w-full appearance-none rounded-md border bg-white px-3 text-sm text-zinc-900 shadow-sm transition-colors",
+          "h-10 w-full cursor-pointer appearance-none rounded-md border bg-white px-3 text-sm text-zinc-900 shadow-sm transition-colors",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
           "disabled:cursor-not-allowed disabled:opacity-50",
           error

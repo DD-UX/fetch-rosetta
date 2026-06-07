@@ -14,7 +14,7 @@ export function Checkbox({ label, className, id, ...props }: CheckboxProps) {
       type="checkbox"
       id={id}
       className={cn(
-        "size-4 shrink-0 rounded border-zinc-300 accent-zinc-900",
+        "size-4 shrink-0 cursor-pointer rounded border-zinc-300 accent-zinc-900",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-1",
         "disabled:cursor-not-allowed disabled:opacity-50",
         className,

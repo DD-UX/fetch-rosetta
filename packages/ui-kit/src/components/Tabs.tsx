@@ -85,7 +85,7 @@ export function TabsTrigger({ value, className, ...props }: TabsTriggerProps) {
       aria-controls={`${context.baseId}-panel-${value}`}
       onClick={() => context.setValue(value)}
       className={cn(
-        "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+        "cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400",
         selected
           ? "bg-white text-zinc-900 shadow-sm"
