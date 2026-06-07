@@ -42,8 +42,12 @@ export function Avatar({
       {...props}
     >
       {src ? (
-        // eslint-disable-next-line @next/next/no-img-element -- kit stays framework-agnostic
-        <img src={src} alt={alt ?? name ?? ""} className="size-full object-cover" />
+        /* plain <img>: the kit stays framework-agnostic (no next/image dependency) */
+        <img
+          src={src}
+          alt={alt ?? name ?? ""}
+          className="size-full object-cover"
+        />
       ) : name ? (
         initialsOf(name)
       ) : (

@@ -6,8 +6,10 @@ export interface SelectOption {
   disabled?: boolean;
 }
 
-export interface SelectProps
-  extends Omit<React.ComponentPropsWithRef<"select">, "children"> {
+export interface SelectProps extends Omit<
+  React.ComponentPropsWithRef<"select">,
+  "children"
+> {
   options: SelectOption[];
   /** Optional placeholder rendered as a disabled first option. */
   placeholder?: string;
@@ -49,7 +51,11 @@ export function Select({
           </option>
         ) : null}
         {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>
+          <option
+            key={option.value}
+            value={option.value}
+            disabled={option.disabled}
+          >
             {option.label}
           </option>
         ))}

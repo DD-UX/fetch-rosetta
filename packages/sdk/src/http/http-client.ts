@@ -5,7 +5,10 @@ export interface HttpClientOptions {
 }
 
 export interface HttpClient {
-  get: <T>(path: string, params?: Record<string, string | number>) => Promise<T>;
+  get: <T>(
+    path: string,
+    params?: Record<string, string | number>,
+  ) => Promise<T>;
   post: <T, B = unknown>(path: string, body: B) => Promise<T>;
   put: <T, B = unknown>(path: string, body: B) => Promise<T>;
   delete: <T>(path: string) => Promise<T>;

@@ -71,11 +71,7 @@ export interface TabsTriggerProps extends React.ComponentPropsWithRef<"button"> 
   value: string;
 }
 
-export function TabsTrigger({
-  value,
-  className,
-  ...props
-}: TabsTriggerProps) {
+export function TabsTrigger({ value, className, ...props }: TabsTriggerProps) {
   const context = useTabsContext("TabsTrigger");
   const selected = context.value === value;
 
@@ -104,11 +100,7 @@ export interface TabsContentProps extends React.ComponentPropsWithRef<"div"> {
   value: string;
 }
 
-export function TabsContent({
-  value,
-  className,
-  ...props
-}: TabsContentProps) {
+export function TabsContent({ value, className, ...props }: TabsContentProps) {
   const context = useTabsContext("TabsContent");
   if (context.value !== value) {
     return null;

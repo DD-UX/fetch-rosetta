@@ -1,6 +1,12 @@
 import { cn } from "../lib/cn";
 
-export type BadgeVariant = "default" | "secondary" | "outline" | "success" | "warning" | "destructive";
+export type BadgeVariant =
+  | "default"
+  | "secondary"
+  | "outline"
+  | "success"
+  | "warning"
+  | "destructive";
 
 const variantClasses: Record<BadgeVariant, string> = {
   default: "bg-zinc-900 text-white",
@@ -15,7 +21,11 @@ export interface BadgeProps extends React.ComponentPropsWithRef<"span"> {
   variant?: BadgeVariant;
 }
 
-export function Badge({ variant = "default", className, ...props }: BadgeProps) {
+export function Badge({
+  variant = "default",
+  className,
+  ...props
+}: BadgeProps) {
   return (
     <span
       className={cn(

@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint src",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -15,7 +16,9 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.0",
+    "eslint": "^9.30.0",
     "react": "^19.2.7",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.40.0"
   }
 }
