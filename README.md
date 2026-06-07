@@ -10,11 +10,15 @@ can be felt instead of read about.
 ```
 fetch-rosetta/
 ├── apps/
-│   └── web/          # Next.js 16 (App Router) + TypeScript + Tailwind CSS 4
+│   └── web/                  # Next.js 16 (App Router) + TypeScript + Tailwind CSS 4
+│       └── src/
+│           ├── app/          # Routes
+│           └── features/     # Feature modules (components, hooks, contexts, helpers, types)
 ├── packages/
-│   └── sdk/          # Shared SDK: typed HTTP client, entity models, fake JWT auth
+│   ├── sdk/                  # Typed HTTP client, entity models, fake JWT auth
+│   └── ui-kit/               # Shared base components (see below)
 ├── pnpm-workspace.yaml
-└── turbo.json        # Turborepo task pipeline
+└── turbo.json                # Turborepo task pipeline
 ```
 
 ## Requirements
@@ -35,17 +39,47 @@ pnpm dev        # turbo dev → next dev for apps/web
 | ---------------- | ------------------------------------- |
 | `pnpm dev`       | Run dev servers across the workspace  |
 | `pnpm build`     | Production build (Turborepo pipeline) |
-| `pnpm lint`      | Lint all packages                     |
+| `pnpm lint`      | ESLint across all packages            |
 | `pnpm typecheck` | Strict TypeScript across the repo     |
 | `pnpm format`    | Prettier over the repo                |
 
-## The SDK (`@fetch-rosetta/sdk`)
+Each package also exposes its own `lint` and `typecheck`, runnable with
+`pnpm --filter <package> <script>`.
+
+## Packages
+
+### `@fetch-rosetta/sdk`
 
 Every matrix cell consumes the same SDK so comparisons stay honest:
 
 - `createHttpClient` — typed fetch wrapper (query params, JSON bodies, Bearer token injection, typed `HttpError`)
 - `createFakeJwt` / `decodeFakeJwt` / `isExpired` — structurally valid but cryptographically fake JWTs to exercise auth flows without an identity provider
 - `models` — shared entity types (e.g. `Paginated<T>`)
+
+### `@fetch-rosetta/ui-kit`
+
+Shared base components so every matrix cell renders the exact same UI — any
+difference you feel between variants is architecture, not styling.
+
+Button, Input, Textarea, Select, Checkbox, Card (with Header/Title/
+Description/Content/Footer), Badge, Alert, Avatar, Spinner, Skeleton, and an
+accessible Tabs (controlled or uncontrolled).
+
+Design notes:
+
+- Zero runtime dependencies; a tiny `cn` join util instead of clsx
+- React 19 idioms: ref-as-prop (no `forwardRef`), named type imports (no `React.` namespace)
+- Tree-shakeable: ESM source exports + `"sideEffects": false`
+- Only `Tabs` ships `"use client"`; everything else is server-component friendly
+- Tailwind 4 aware: `cursor-pointer` applied explicitly to actionable elements
+  (v4 Preflight no longer does), and consumers must `@source` the kit since
+  Tailwind doesn't scan `node_modules`
+
+## Code style
+
+- TypeScript strict mode everywhere (`tsconfig.base.json`)
+- ESLint flat configs per package (`typescript-eslint` recommended; Next.js rules in `apps/web`)
+- Prettier (defaults) across the repo — `pnpm format`
 
 ## Data sources (planned)
 
