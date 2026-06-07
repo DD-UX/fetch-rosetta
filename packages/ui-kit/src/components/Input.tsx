@@ -1,6 +1,7 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
-export interface InputProps extends React.ComponentPropsWithRef<"input"> {
+export interface InputProps extends ComponentPropsWithRef<"input"> {
   /** Renders the input in an error state and links the message for screen readers. */
   error?: string;
 }

@@ -1,3 +1,4 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 export type BadgeVariant =
@@ -17,7 +18,7 @@ const variantClasses: Record<BadgeVariant, string> = {
   destructive: "bg-red-100 text-red-800",
 };
 
-export interface BadgeProps extends React.ComponentPropsWithRef<"span"> {
+export interface BadgeProps extends ComponentPropsWithRef<"span"> {
   variant?: BadgeVariant;
 }
 

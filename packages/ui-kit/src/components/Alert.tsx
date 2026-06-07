@@ -1,3 +1,4 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 export type AlertVariant = "info" | "success" | "warning" | "error";
@@ -9,7 +10,7 @@ const variantClasses: Record<AlertVariant, string> = {
   error: "border-red-200 bg-red-50 text-red-900",
 };
 
-export interface AlertProps extends React.ComponentPropsWithRef<"div"> {
+export interface AlertProps extends ComponentPropsWithRef<"div"> {
   variant?: AlertVariant;
   title?: string;
 }

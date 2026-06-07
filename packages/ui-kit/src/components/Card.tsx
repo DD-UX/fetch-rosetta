@@ -1,6 +1,7 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
-export type CardProps = React.ComponentPropsWithRef<"div">;
+export type CardProps = ComponentPropsWithRef<"div">;
 
 export function Card({ className, ...props }: CardProps) {
   return (
@@ -23,7 +24,7 @@ export function CardHeader({ className, ...props }: CardProps) {
 export function CardTitle({
   className,
   ...props
-}: React.ComponentPropsWithRef<"h3">) {
+}: ComponentPropsWithRef<"h3">) {
   return (
     <h3
       className={cn(
@@ -38,7 +39,7 @@ export function CardTitle({
 export function CardDescription({
   className,
   ...props
-}: React.ComponentPropsWithRef<"p">) {
+}: ComponentPropsWithRef<"p">) {
   return <p className={cn("text-sm text-zinc-500", className)} {...props} />;
 }
 

@@ -1,6 +1,7 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
-export interface TextareaProps extends React.ComponentPropsWithRef<"textarea"> {
+export interface TextareaProps extends ComponentPropsWithRef<"textarea"> {
   error?: string;
 }
 

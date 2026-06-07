@@ -1,6 +1,7 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
-export type SkeletonProps = React.ComponentPropsWithRef<"div">;
+export type SkeletonProps = ComponentPropsWithRef<"div">;
 
 export function Skeleton({ className, ...props }: SkeletonProps) {
   return (

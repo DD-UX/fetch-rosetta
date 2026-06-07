@@ -1,3 +1,4 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 export type SpinnerSize = "sm" | "md" | "lg";
@@ -8,7 +9,7 @@ const sizeClasses: Record<SpinnerSize, string> = {
   lg: "size-10 border-4",
 };
 
-export interface SpinnerProps extends React.ComponentPropsWithRef<"span"> {
+export interface SpinnerProps extends ComponentPropsWithRef<"span"> {
   size?: SpinnerSize;
   /** Accessible label announced to screen readers. */
   label?: string;

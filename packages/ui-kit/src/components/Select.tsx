@@ -1,3 +1,4 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 export interface SelectOption {
@@ -7,7 +8,7 @@ export interface SelectOption {
 }
 
 export interface SelectProps extends Omit<
-  React.ComponentPropsWithRef<"select">,
+  ComponentPropsWithRef<"select">,
   "children"
 > {
   options: SelectOption[];

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useId, useState } from "react";
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 interface TabsContextValue {
@@ -19,7 +20,7 @@ function useTabsContext(component: string): TabsContextValue {
   return context;
 }
 
-export interface TabsProps extends React.ComponentPropsWithRef<"div"> {
+export interface TabsProps extends ComponentPropsWithRef<"div"> {
   defaultValue: string;
   value?: string;
   onValueChange?: (value: string) => void;
@@ -54,7 +55,7 @@ export function Tabs({
 export function TabsList({
   className,
   ...props
-}: React.ComponentPropsWithRef<"div">) {
+}: ComponentPropsWithRef<"div">) {
   return (
     <div
       role="tablist"
@@ -67,7 +68,7 @@ export function TabsList({
   );
 }
 
-export interface TabsTriggerProps extends React.ComponentPropsWithRef<"button"> {
+export interface TabsTriggerProps extends ComponentPropsWithRef<"button"> {
   value: string;
 }
 
@@ -96,7 +97,7 @@ export function TabsTrigger({ value, className, ...props }: TabsTriggerProps) {
   );
 }
 
-export interface TabsContentProps extends React.ComponentPropsWithRef<"div"> {
+export interface TabsContentProps extends ComponentPropsWithRef<"div"> {
   value: string;
 }
 

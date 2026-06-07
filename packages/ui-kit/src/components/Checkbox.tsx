@@ -1,7 +1,8 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 export interface CheckboxProps extends Omit<
-  React.ComponentPropsWithRef<"input">,
+  ComponentPropsWithRef<"input">,
   "type"
 > {
   label?: string;

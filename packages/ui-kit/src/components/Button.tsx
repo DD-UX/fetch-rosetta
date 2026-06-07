@@ -1,3 +1,4 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 export type ButtonVariant =
@@ -27,7 +28,7 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "h-12 px-6 text-base",
 };
 
-export interface ButtonProps extends React.ComponentPropsWithRef<"button"> {
+export interface ButtonProps extends ComponentPropsWithRef<"button"> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   /** Shows a spinner and disables the button. */

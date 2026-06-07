@@ -1,3 +1,4 @@
+import type { ComponentPropsWithRef } from "react";
 import { cn } from "../lib/cn";
 
 export type AvatarSize = "sm" | "md" | "lg";
@@ -8,7 +9,7 @@ const sizeClasses: Record<AvatarSize, string> = {
   lg: "size-14 text-base",
 };
 
-export interface AvatarProps extends React.ComponentPropsWithRef<"div"> {
+export interface AvatarProps extends ComponentPropsWithRef<"div"> {
   src?: string;
   alt?: string;
   /** Fallback shown when no image: derived initials from this name. */
