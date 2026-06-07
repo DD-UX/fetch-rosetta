@@ -1,0 +1,23 @@
+{
+  "name": "fetch-rosetta",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Same app, many data layers — a comparison matrix of React data-fetching and state architectures.",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.5.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.0"
+  },
+  "packageManager": "pnpm@11.5.2",
+  "engines": {
+    "node": ">=22"
+  }
+}

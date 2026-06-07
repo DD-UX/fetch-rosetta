@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# builds
+.next/
+dist/
+out/
+
+# turbo
+.turbo/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# misc
+.DS_Store
+*.log
+
+# sandbox/tooling leftovers (safe to delete manually)
+_tmp_*
+.write-test
+
+# IDE
+.idea/
+.vscode/
