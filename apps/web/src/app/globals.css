@@ -1,1 +1,4 @@
 @import "tailwindcss";
+
+/* Scan workspace packages for Tailwind classes (node_modules is skipped by default). */
+@source "../../../../packages/ui-kit/src";
