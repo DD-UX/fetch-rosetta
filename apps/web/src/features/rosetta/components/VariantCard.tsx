@@ -12,7 +12,7 @@ import {
 import {
   type FetchVariant,
   variantHref,
-} from "@/features/common/constants/fetch-variants";
+} from "@/features/common/constants/fetch-variants.constants";
 
 export interface VariantCardProps extends ComponentPropsWithRef<"div"> {
   variant: FetchVariant;

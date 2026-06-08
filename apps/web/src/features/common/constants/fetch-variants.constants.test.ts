@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { FETCH_VARIANTS, variantHref } from "./fetch-variants";
+import { FETCH_VARIANTS, variantHref } from "./fetch-variants.constants";
 
 describe("FETCH_VARIANTS", () => {
   describe("positive", () => {

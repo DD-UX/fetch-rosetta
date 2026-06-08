@@ -3,7 +3,7 @@
 import type { ComponentPropsWithRef } from "react";
 import { REQUEST_STATUS } from "@fetch-rosetta/sdk";
 import { Alert, Skeleton, cn } from "@fetch-rosetta/ui-kit";
-import { useCharacters } from "../hooks/use-characters";
+import { useCharacters } from "../hooks/use-characters.hook";
 import { CharacterCard } from "./CharacterCard";
 
 export type CharacterListProps = ComponentPropsWithRef<"div">;

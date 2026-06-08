@@ -6,7 +6,7 @@ import {
   type Character,
   type RequestStatus,
 } from "@fetch-rosetta/sdk";
-import { fetchCharacters } from "../helpers/characters-client";
+import { fetchCharacters } from "../helpers/characters-client.helpers";
 
 export interface UseCharactersResult {
   status: RequestStatus;

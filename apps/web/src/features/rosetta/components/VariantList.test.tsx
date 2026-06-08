@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { VariantList } from "./VariantList";
-import { FETCH_VARIANTS } from "@/features/common/constants/fetch-variants";
+import { FETCH_VARIANTS } from "@/features/common/constants/fetch-variants.constants";
 
 describe("VariantList", () => {
   describe("positive", () => {

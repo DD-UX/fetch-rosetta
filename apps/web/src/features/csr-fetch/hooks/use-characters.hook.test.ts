@@ -1,10 +1,10 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { REQUEST_STATUS, type Character } from "@fetch-rosetta/sdk";
-import { useCharacters } from "./use-characters";
-import { fetchCharacters } from "../helpers/characters-client";
+import { useCharacters } from "./use-characters.hook";
+import { fetchCharacters } from "../helpers/characters-client.helpers";
 
-vi.mock("../helpers/characters-client", () => ({
+vi.mock("../helpers/characters-client.helpers", () => ({
   fetchCharacters: vi.fn(),
 }));
 

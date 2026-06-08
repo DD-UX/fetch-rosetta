@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef } from "react";
 import { cn } from "@fetch-rosetta/ui-kit";
-import { FETCH_VARIANTS } from "@/features/common/constants/fetch-variants";
+import { FETCH_VARIANTS } from "@/features/common/constants/fetch-variants.constants";
 import { VariantCard } from "./VariantCard";
 
 export type VariantListProps = ComponentPropsWithRef<"ul">;

@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { REQUEST_STATUS, type Character } from "@fetch-rosetta/sdk";
 import { CharacterList } from "./CharacterList";
-import type { UseCharactersResult } from "../hooks/use-characters";
-import { useCharacters } from "../hooks/use-characters";
+import type { UseCharactersResult } from "../hooks/use-characters.hook";
+import { useCharacters } from "../hooks/use-characters.hook";
 
-vi.mock("../hooks/use-characters", () => ({
+vi.mock("../hooks/use-characters.hook", () => ({
   useCharacters: vi.fn(),
 }));
 

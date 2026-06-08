@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { VariantCard } from "./VariantCard";
-import type { FetchVariant } from "@/features/common/constants/fetch-variants";
+import type { FetchVariant } from "@/features/common/constants/fetch-variants.constants";
 
 const availableVariant: FetchVariant = {
   id: "csr-fetch",
