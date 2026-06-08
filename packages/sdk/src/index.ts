@@ -4,6 +4,9 @@ export type { HttpClient, HttpClientOptions } from "./http/http-client";
 export { createFakeJwt, decodeFakeJwt, isExpired } from "./auth/fake-jwt";
 export type { FakeJwtPayload } from "./auth/fake-jwt";
 
+export { REQUEST_STATUS } from "./async/request-state";
+export type { RequestStatus } from "./async/request-state";
+
 export * from "./models";
 
 /** Smoke-test helper to prove the SDK is wired into an app. */
