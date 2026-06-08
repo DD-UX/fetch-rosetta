@@ -1,5 +1,9 @@
 export { createHttpClient } from "./http/http-client";
-export type { HttpClient, HttpClientOptions } from "./http/http-client";
+export type {
+  HttpClient,
+  HttpClientOptions,
+  RequestOptions,
+} from "./http/http-client";
 
 export { createFakeJwt, decodeFakeJwt, isExpired } from "./auth/fake-jwt";
 export type { FakeJwtPayload } from "./auth/fake-jwt";

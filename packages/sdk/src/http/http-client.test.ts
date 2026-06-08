@@ -71,6 +71,17 @@ describe("createHttpClient", () => {
     expect(init.body).toBe(JSON.stringify({ title: "Phone" }));
   });
 
+  it("forwards an AbortSignal to fetch", async () => {
+    const fetchMock = mockFetchOnce({});
+    const client = createHttpClient({ baseUrl: "https://api.example.com" });
+    const controller = new AbortController();
+
+    await client.get("/me", undefined, { signal: controller.signal });
+
+    const init = fetchMock.mock.calls[0]?.[1] as RequestInit;
+    expect(init.signal).toBe(controller.signal);
+  });
+
   it("throws a typed HttpError on non-ok responses", async () => {
     mockFetchOnce({}, { ok: false, status: 404 });
     const client = createHttpClient({ baseUrl: "https://api.example.com" });
