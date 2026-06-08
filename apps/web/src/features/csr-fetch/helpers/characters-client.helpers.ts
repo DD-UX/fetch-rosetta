@@ -8,7 +8,7 @@ import {
  * Origin of the public Rick & Morty API. The path (`/api/character`) is passed
  * per-request so the SDK's `new URL(path, baseUrl)` keeps the `/api` segment.
  */
-export const RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com";
+const RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com";
 
 const client = createHttpClient({ baseUrl: RICK_AND_MORTY_BASE_URL });
 
