@@ -9,10 +9,8 @@ import {
   CardTitle,
   cn,
 } from "@fetch-rosetta/ui-kit";
-import {
-  type FetchVariant,
-  variantHref,
-} from "@/features/common/constants/fetch-variants.constants";
+import { variantHref } from "@/features/common/constants/fetch-variants.constants";
+import type { FetchVariant } from "@/features/common/types/fetch-variant.types";
 
 export interface VariantCardProps extends ComponentPropsWithRef<"div"> {
   variant: FetchVariant;
