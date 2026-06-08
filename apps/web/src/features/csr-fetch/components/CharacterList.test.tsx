@@ -1,33 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { REQUEST_STATUS, type Character } from "@fetch-rosetta/sdk";
+import { REQUEST_STATUS } from "@fetch-rosetta/sdk";
 import { CharacterList } from "./CharacterList";
 import type { UseCharactersResult } from "../hooks/use-characters.hook";
 import { useCharacters } from "../hooks/use-characters.hook";
+import { makeCharacter } from "../helpers/character.helpers";
 
 vi.mock("../hooks/use-characters.hook", () => ({
   useCharacters: vi.fn(),
 }));
 
 const useCharactersMock = vi.mocked(useCharacters);
-
-function makeCharacter(overrides: Partial<Character> = {}): Character {
-  return {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    type: "",
-    gender: "Male",
-    origin: { name: "Earth", url: "" },
-    location: { name: "Earth", url: "" },
-    image: "https://example.com/1.jpeg",
-    episode: [],
-    url: "",
-    created: "",
-    ...overrides,
-  };
-}
 
 function mockState(state: Partial<UseCharactersResult>) {
   useCharactersMock.mockReturnValue({
