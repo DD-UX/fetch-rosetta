@@ -39,9 +39,7 @@ describe("CharacterCard", () => {
 
   describe("negative", () => {
     it("does not show a status other than the character's own", () => {
-      render(
-        <CharacterCard character={makeCharacter({ status: "Dead" })} />,
-      );
+      render(<CharacterCard character={makeCharacter({ status: "Dead" })} />);
       expect(screen.getByText("Dead")).toBeInTheDocument();
       expect(screen.queryByText("Alive")).not.toBeInTheDocument();
     });

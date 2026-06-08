@@ -30,9 +30,7 @@ export function CharacterCard({
         <Avatar src={character.image} name={character.name} size="lg" />
         <div className="flex min-w-0 flex-col gap-1">
           <p className="truncate font-medium">{character.name}</p>
-          <p className="truncate text-sm text-zinc-500">
-            {character.species}
-          </p>
+          <p className="truncate text-sm text-zinc-500">{character.species}</p>
           <Badge variant={statusBadgeVariant[character.status]}>
             {character.status}
           </Badge>
