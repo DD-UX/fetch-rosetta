@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Character } from "@fetch-rosetta/sdk";
+import {
+  REQUEST_STATUS,
+  type Character,
+  type RequestStatus,
+} from "@fetch-rosetta/sdk";
 import { fetchCharacters } from "../helpers/characters-client";
 
-export type CharactersStatus = "loading" | "success" | "error";
-
 export interface UseCharactersResult {
-  status: CharactersStatus;
+  status: RequestStatus;
   characters: Character[];
   error: Error | null;
 }
@@ -18,26 +20,26 @@ export interface UseCharactersResult {
  * `ignore` flag in cleanup, so a stale response can never overwrite fresh state.
  */
 export function useCharacters(): UseCharactersResult {
-  const [status, setStatus] = useState<CharactersStatus>("loading");
+  const [status, setStatus] = useState<RequestStatus>(REQUEST_STATUS.loading);
   const [characters, setCharacters] = useState<Character[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     let ignore = false;
 
-    setStatus("loading");
+    setStatus(REQUEST_STATUS.loading);
     setError(null);
 
     fetchCharacters()
       .then((result) => {
         if (ignore) return;
         setCharacters(result);
-        setStatus("success");
+        setStatus(REQUEST_STATUS.success);
       })
       .catch((cause: unknown) => {
         if (ignore) return;
         setError(cause instanceof Error ? cause : new Error("Unknown error"));
-        setStatus("error");
+        setStatus(REQUEST_STATUS.error);
       });
 
     return () => {

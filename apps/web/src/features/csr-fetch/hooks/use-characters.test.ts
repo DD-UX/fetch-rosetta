@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { Character } from "@fetch-rosetta/sdk";
+import { REQUEST_STATUS, type Character } from "@fetch-rosetta/sdk";
 import { useCharacters } from "./use-characters";
 import { fetchCharacters } from "../helpers/characters-client";
 
@@ -37,7 +37,7 @@ describe("useCharacters", () => {
     it("starts in the loading state", () => {
       fetchCharactersMock.mockReturnValue(new Promise(() => {}));
       const { result } = renderHook(() => useCharacters());
-      expect(result.current.status).toBe("loading");
+      expect(result.current.status).toBe(REQUEST_STATUS.loading);
       expect(result.current.characters).toEqual([]);
     });
 
@@ -47,7 +47,9 @@ describe("useCharacters", () => {
 
       const { result } = renderHook(() => useCharacters());
 
-      await waitFor(() => expect(result.current.status).toBe("success"));
+      await waitFor(() =>
+        expect(result.current.status).toBe(REQUEST_STATUS.success),
+      );
       expect(result.current.characters).toEqual(characters);
       expect(result.current.error).toBeNull();
     });
@@ -59,7 +61,9 @@ describe("useCharacters", () => {
 
       const { result } = renderHook(() => useCharacters());
 
-      await waitFor(() => expect(result.current.status).toBe("error"));
+      await waitFor(() =>
+        expect(result.current.status).toBe(REQUEST_STATUS.error),
+      );
       expect(result.current.error?.message).toBe("network down");
       expect(result.current.characters).toEqual([]);
     });
@@ -77,7 +81,7 @@ describe("useCharacters", () => {
       resolve([makeCharacter()]);
 
       // State stays at the last value seen before unmount; no throw on update.
-      expect(result.current.status).toBe("loading");
+      expect(result.current.status).toBe(REQUEST_STATUS.loading);
     });
   });
 });

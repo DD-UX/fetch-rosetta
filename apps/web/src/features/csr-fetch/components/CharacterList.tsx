@@ -1,6 +1,7 @@
 "use client";
 
 import type { ComponentPropsWithRef } from "react";
+import { REQUEST_STATUS } from "@fetch-rosetta/sdk";
 import { Alert, Skeleton, cn } from "@fetch-rosetta/ui-kit";
 import { useCharacters } from "../hooks/use-characters";
 import { CharacterCard } from "./CharacterCard";
@@ -14,13 +15,13 @@ export function CharacterList({ className, ...props }: CharacterListProps) {
 
   return (
     <div className={cn(className)} {...props}>
-      {status === "loading" ? (
+      {status === REQUEST_STATUS.loading ? (
         <div className={gridClasses} aria-busy>
           {Array.from({ length: 6 }, (_, index) => (
             <Skeleton key={index} className="h-24 w-full rounded-lg" />
           ))}
         </div>
-      ) : status === "error" ? (
+      ) : status === REQUEST_STATUS.error ? (
         <Alert variant="error" title="Couldn't load characters">
           {error?.message ?? "Something went wrong while fetching characters."}
         </Alert>

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { Character } from "@fetch-rosetta/sdk";
+import { REQUEST_STATUS, type Character } from "@fetch-rosetta/sdk";
 import { CharacterList } from "./CharacterList";
 import type { UseCharactersResult } from "../hooks/use-characters";
 import { useCharacters } from "../hooks/use-characters";
@@ -31,7 +31,7 @@ function makeCharacter(overrides: Partial<Character> = {}): Character {
 
 function mockState(state: Partial<UseCharactersResult>) {
   useCharactersMock.mockReturnValue({
-    status: "success",
+    status: REQUEST_STATUS.success,
     characters: [],
     error: null,
     ...state,
@@ -46,7 +46,7 @@ describe("CharacterList", () => {
   describe("positive", () => {
     it("renders a card for each fetched character", () => {
       mockState({
-        status: "success",
+        status: REQUEST_STATUS.success,
         characters: [
           makeCharacter({ id: 1, name: "Rick Sanchez" }),
           makeCharacter({ id: 2, name: "Morty Smith" }),
@@ -61,7 +61,7 @@ describe("CharacterList", () => {
     });
 
     it("shows a busy placeholder while loading", () => {
-      mockState({ status: "loading" });
+      mockState({ status: REQUEST_STATUS.loading });
       const { container } = render(<CharacterList />);
       expect(container.querySelector("[aria-busy]")).toBeInTheDocument();
     });
@@ -69,7 +69,10 @@ describe("CharacterList", () => {
 
   describe("negative", () => {
     it("renders an error alert when the fetch fails", () => {
-      mockState({ status: "error", error: new Error("network down") });
+      mockState({
+        status: REQUEST_STATUS.error,
+        error: new Error("network down"),
+      });
 
       render(<CharacterList />);
 
@@ -78,7 +81,7 @@ describe("CharacterList", () => {
     });
 
     it("renders an empty-state alert when there are no characters", () => {
-      mockState({ status: "success", characters: [] });
+      mockState({ status: REQUEST_STATUS.success, characters: [] });
 
       render(<CharacterList />);
 
@@ -87,7 +90,7 @@ describe("CharacterList", () => {
     });
 
     it("does not render character cards while loading", () => {
-      mockState({ status: "loading" });
+      mockState({ status: REQUEST_STATUS.loading });
       render(<CharacterList />);
       expect(screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
     });
