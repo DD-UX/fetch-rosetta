@@ -21,6 +21,18 @@ describe("Header", () => {
       expect(screen.getByRole("banner")).toBeInTheDocument();
     });
 
+    it("links the wordmark home and exposes a variants link", () => {
+      render(<Header />);
+      expect(screen.getByRole("link", { name: "fetch-rosetta" })).toHaveAttribute(
+        "href",
+        "/",
+      );
+      expect(screen.getByRole("link", { name: "Variants" })).toHaveAttribute(
+        "href",
+        "/rosetta",
+      );
+    });
+
     it("forwards className and arbitrary props to the header", () => {
       render(<Header className="custom-class" data-testid="site-header" />);
       const header = screen.getByRole("banner");
