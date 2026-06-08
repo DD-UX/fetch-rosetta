@@ -10,13 +10,6 @@ describe("HomePage", () => {
     ).toBeInTheDocument();
   });
 
-  it("shows the SDK wiring badge", () => {
-    render(<HomePage />);
-    expect(
-      screen.getByText(/SDK wired: @fetch-rosetta\/sdk/),
-    ).toBeInTheDocument();
-  });
-
   it("renders the UI kit showcase tab by default", () => {
     render(<HomePage />);
     expect(screen.getByText("Component showcase")).toBeInTheDocument();

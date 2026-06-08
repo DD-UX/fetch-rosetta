@@ -6,6 +6,7 @@ node_modules/
 .next/
 dist/
 out/
+*.tsbuildinfo
 
 # turbo
 .turbo/
@@ -27,6 +28,9 @@ playwright-report/
 # sandbox/tooling leftovers (safe to delete manually)
 _tmp_*
 .write-test
+
+# local-only notes
+CLAUDE.md
 
 # IDE
 .idea/

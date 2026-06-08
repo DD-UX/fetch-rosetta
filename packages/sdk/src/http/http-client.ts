@@ -4,14 +4,29 @@ export interface HttpClientOptions {
   getToken?: () => string | null;
 }
 
+/** Per-request options shared by every verb (e.g. cancellation). */
+export interface RequestOptions {
+  /** Abort the in-flight request when this signal fires. */
+  signal?: AbortSignal;
+}
+
 export interface HttpClient {
   get: <T>(
     path: string,
     params?: Record<string, string | number>,
+    options?: RequestOptions,
   ) => Promise<T>;
-  post: <T, B = unknown>(path: string, body: B) => Promise<T>;
-  put: <T, B = unknown>(path: string, body: B) => Promise<T>;
-  delete: <T>(path: string) => Promise<T>;
+  post: <T, B = unknown>(
+    path: string,
+    body: B,
+    options?: RequestOptions,
+  ) => Promise<T>;
+  put: <T, B = unknown>(
+    path: string,
+    body: B,
+    options?: RequestOptions,
+  ) => Promise<T>;
+  delete: <T>(path: string, options?: RequestOptions) => Promise<T>;
 }
 
 export class HttpError extends Error {
@@ -37,6 +52,7 @@ export function createHttpClient(options: HttpClientOptions): HttpClient {
     path: string,
     params?: Record<string, string | number>,
     body?: unknown,
+    options?: RequestOptions,
   ): Promise<T> {
     const url = new URL(path, baseUrl);
     if (params) {
@@ -57,6 +73,7 @@ export function createHttpClient(options: HttpClientOptions): HttpClient {
       method,
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),
+      signal: options?.signal,
     });
 
     if (!response.ok) {
@@ -67,9 +84,13 @@ export function createHttpClient(options: HttpClientOptions): HttpClient {
   }
 
   return {
-    get: (path, params) => request("GET", path, params),
-    post: (path, body) => request("POST", path, undefined, body),
-    put: (path, body) => request("PUT", path, undefined, body),
-    delete: (path) => request("DELETE", path),
+    get: (path, params, options) =>
+      request("GET", path, params, undefined, options),
+    post: (path, body, options) =>
+      request("POST", path, undefined, body, options),
+    put: (path, body, options) =>
+      request("PUT", path, undefined, body, options),
+    delete: (path, options) =>
+      request("DELETE", path, undefined, undefined, options),
   };
 }
