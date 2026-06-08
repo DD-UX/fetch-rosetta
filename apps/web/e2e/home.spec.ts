@@ -12,6 +12,17 @@ test.describe("home page", () => {
     ).toBeVisible();
   });
 
+  test("shows the hero with data-fetching variant chips", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Fetch Rosetta" }),
+    ).toBeVisible();
+    await expect(page.getByText("Zustand")).toBeVisible();
+    await expect(page.getByText("TanStack Query")).toBeVisible();
+    await expect(page.getByText("SWR")).toBeVisible();
+  });
+
   test("switches tabs in the showcase", async ({ page }) => {
     await page.goto("/");
 
