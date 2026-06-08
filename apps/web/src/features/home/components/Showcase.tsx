@@ -21,19 +21,27 @@ import {
   TabsList,
   TabsTrigger,
 } from "@fetch-rosetta/ui-kit";
+import {
+  SHOWCASE_DEFAULT_TAB,
+  SHOWCASE_TABS,
+} from "../constants/showcase-tabs.constants";
 
 export type ShowcaseProps = ComponentPropsWithRef<"div">;
 
 export function Showcase({ className, ...props }: ShowcaseProps) {
   return (
     <div className={cn(className)} {...props}>
-      <Tabs defaultValue="kit">
+      <Tabs defaultValue={SHOWCASE_DEFAULT_TAB}>
         <TabsList>
-          <TabsTrigger value="kit">UI Kit</TabsTrigger>
-          <TabsTrigger value="about">About</TabsTrigger>
+          <TabsTrigger value={SHOWCASE_TABS.kit.value}>
+            {SHOWCASE_TABS.kit.label}
+          </TabsTrigger>
+          <TabsTrigger value={SHOWCASE_TABS.about.value}>
+            {SHOWCASE_TABS.about.label}
+          </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="kit">
+        <TabsContent value={SHOWCASE_TABS.kit.value}>
           <Card>
             <CardHeader>
               <CardTitle>Component showcase</CardTitle>
@@ -90,7 +98,7 @@ export function Showcase({ className, ...props }: ShowcaseProps) {
           </Card>
         </TabsContent>
 
-        <TabsContent value="about">
+        <TabsContent value={SHOWCASE_TABS.about.value}>
           <Card>
             <CardHeader>
               <CardTitle>Why a shared kit?</CardTitle>
