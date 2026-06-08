@@ -18,7 +18,8 @@ export const FETCH_VARIANTS: readonly FetchVariant[] = [
   {
     id: "rsc",
     label: "RSC + Server Actions",
-    description: "Fetch on the server, stream to the client, mutate via actions.",
+    description:
+      "Fetch on the server, stream to the client, mutate via actions.",
     available: false,
   },
   {
@@ -30,7 +31,8 @@ export const FETCH_VARIANTS: readonly FetchVariant[] = [
   {
     id: "csr-fetch",
     label: "CSR fetch",
-    description: "Browser-side fetch via the SDK with a race-safe useEffect hook.",
+    description:
+      "Browser-side fetch via the SDK with an AbortController-cancelled useEffect hook.",
     available: true,
   },
   {

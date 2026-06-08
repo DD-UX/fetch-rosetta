@@ -16,8 +16,10 @@ export interface UseCharactersResult {
 
 /**
  * Client-side character fetch using the canonical React pattern: kick off the
- * request in an effect and guard against race conditions / unmount with an
- * `ignore` flag in cleanup, so a stale response can never overwrite fresh state.
+ * request in an effect and cancel it on unmount / re-run via an
+ * `AbortController`, so an in-flight request is torn down and a stale response
+ * can never overwrite fresh state. Aborts are intentional, so they are ignored
+ * rather than surfaced as errors.
  */
 export function useCharacters(): UseCharactersResult {
   const [status, setStatus] = useState<RequestStatus>(REQUEST_STATUS.loading);
@@ -25,25 +27,24 @@ export function useCharacters(): UseCharactersResult {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    let ignore = false;
+    const controller = new AbortController();
 
     setStatus(REQUEST_STATUS.loading);
     setError(null);
 
-    fetchCharacters()
+    fetchCharacters(controller.signal)
       .then((result) => {
-        if (ignore) return;
         setCharacters(result);
         setStatus(REQUEST_STATUS.success);
       })
       .catch((cause: unknown) => {
-        if (ignore) return;
+        if (controller.signal.aborted) return;
         setError(cause instanceof Error ? cause : new Error("Unknown error"));
         setStatus(REQUEST_STATUS.error);
       });
 
     return () => {
-      ignore = true;
+      controller.abort();
     };
   }, []);
 

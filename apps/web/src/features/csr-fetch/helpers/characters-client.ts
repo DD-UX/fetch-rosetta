@@ -13,7 +13,13 @@ export const RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com";
 const client = createHttpClient({ baseUrl: RICK_AND_MORTY_BASE_URL });
 
 /** Fetches the first page of characters from the Rick & Morty API. */
-export async function fetchCharacters(): Promise<Character[]> {
-  const data = await client.get<CharacterListResponse>("/api/character");
+export async function fetchCharacters(
+  signal?: AbortSignal,
+): Promise<Character[]> {
+  const data = await client.get<CharacterListResponse>(
+    "/api/character",
+    undefined,
+    { signal },
+  );
   return data.results;
 }

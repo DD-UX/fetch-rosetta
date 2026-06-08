@@ -68,20 +68,37 @@ describe("useCharacters", () => {
       expect(result.current.characters).toEqual([]);
     });
 
-    it("ignores a resolved response after unmount", async () => {
-      let resolve: (value: Character[]) => void = () => {};
-      fetchCharactersMock.mockReturnValue(
-        new Promise<Character[]>((res) => {
-          resolve = res;
-        }),
-      );
+    it("aborts the in-flight request on unmount", async () => {
+      let receivedSignal: AbortSignal | undefined;
+      fetchCharactersMock.mockImplementation((signal?: AbortSignal) => {
+        receivedSignal = signal;
+        return new Promise<Character[]>(() => {});
+      });
+
+      const { result, unmount } = renderHook(() => useCharacters());
+      expect(receivedSignal?.aborted).toBe(false);
+
+      unmount();
+
+      // The effect cleanup aborts the controller; state never advances.
+      expect(receivedSignal?.aborted).toBe(true);
+      expect(result.current.status).toBe(REQUEST_STATUS.loading);
+    });
+
+    it("does not surface an error when the request is aborted", async () => {
+      fetchCharactersMock.mockImplementation((signal?: AbortSignal) => {
+        return new Promise<Character[]>((_, reject) => {
+          signal?.addEventListener("abort", () => {
+            reject(new DOMException("Aborted", "AbortError"));
+          });
+        });
+      });
 
       const { result, unmount } = renderHook(() => useCharacters());
       unmount();
-      resolve([makeCharacter()]);
 
-      // State stays at the last value seen before unmount; no throw on update.
       expect(result.current.status).toBe(REQUEST_STATUS.loading);
+      expect(result.current.error).toBeNull();
     });
   });
 });
