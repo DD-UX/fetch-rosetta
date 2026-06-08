@@ -2,6 +2,7 @@ import type { ComponentPropsWithRef } from "react";
 import Link from "next/link";
 import {
   Badge,
+  Button,
   Card,
   CardDescription,
   CardFooter,
@@ -17,13 +18,12 @@ export interface VariantCardProps extends ComponentPropsWithRef<"div"> {
 }
 
 /**
- * Button-like CTA styling shared by the live link and the disabled placeholder
- * so both render identically. The ui-kit `Button` is `<button>`-only, so a real
- * navigation CTA must be an `<a>` (Next `Link`) — we mirror the kit's primary
- * `sm` button here rather than nest a button inside an anchor.
+ * The ui-kit `Button` is `<button>`-only, so a real navigation CTA must be an
+ * `<a>` (Next `Link`). These classes mirror the kit's primary `sm` button for
+ * the link case; the disabled placeholder uses the kit `Button` directly.
  */
-const ctaClasses =
-  "inline-flex h-8 cursor-pointer items-center justify-center gap-2 rounded-md px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2";
+const ctaLinkClasses =
+  "inline-flex h-8 cursor-pointer items-center justify-center gap-2 rounded-md px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 bg-zinc-900 text-white hover:bg-zinc-700";
 
 export function VariantCard({
   variant,
@@ -45,26 +45,13 @@ export function VariantCard({
       </CardHeader>
       <CardFooter className="mt-auto">
         {variant.available ? (
-          <Link
-            href={variantHref(variant)}
-            className={cn(
-              ctaClasses,
-              "bg-zinc-900 text-white hover:bg-zinc-700",
-            )}
-          >
+          <Link href={variantHref(variant)} className={ctaLinkClasses}>
             Open variant
           </Link>
         ) : (
-          <button
-            type="button"
-            disabled
-            className={cn(
-              ctaClasses,
-              "cursor-not-allowed border border-zinc-300 text-zinc-400",
-            )}
-          >
+          <Button variant="outline" size="sm" disabled>
             Open variant
-          </button>
+          </Button>
         )}
       </CardFooter>
     </Card>
