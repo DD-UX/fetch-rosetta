@@ -26,7 +26,7 @@ export function CharacterCard({
 }: CharacterCardProps) {
   return (
     <Card className={cn("h-full", className)} {...props}>
-      <CardContent className="flex items-center gap-3 p-4">
+      <CardContent className="flex items-center gap-3 p-4 pt-4">
         <Avatar src={character.image} name={character.name} size="lg" />
         <div className="flex min-w-0 flex-col gap-1">
           <p className="truncate font-medium">{character.name}</p>
