@@ -10,7 +10,10 @@ import {
  * Ideally the SDK would own this origin; until then it lives here once and is
  * shared by every fetch strategy.
  */
-const RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com";
+export const RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com";
+
+/** Path to the Rick & Morty character collection, resolved against the origin. */
+export const CHARACTERS_API_PATH = "/api/character";
 
 const client = createHttpClient({ baseUrl: RICK_AND_MORTY_BASE_URL });
 
@@ -23,7 +26,7 @@ export async function fetchCharacters(
   signal?: AbortSignal,
 ): Promise<Character[]> {
   const data = await client.get<CharacterListResponse>(
-    "/api/character",
+    CHARACTERS_API_PATH,
     undefined,
     { signal },
   );

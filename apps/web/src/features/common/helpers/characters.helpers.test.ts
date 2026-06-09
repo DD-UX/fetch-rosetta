@@ -1,6 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createHttpClient } from "@fetch-rosetta/sdk";
-import { fetchCharacters } from "./characters.helpers";
+import {
+  CHARACTERS_API_PATH,
+  RICK_AND_MORTY_BASE_URL,
+  fetchCharacters,
+} from "./characters.helpers";
 import { makeCharacter } from "@/features/common/helpers/character.helpers";
 
 const { getMock } = vi.hoisted(() => ({ getMock: vi.fn() }));
@@ -25,7 +29,7 @@ describe("fetchCharacters", () => {
 
   it("wires up the SDK client once for the Rick & Morty origin", () => {
     expect(createHttpClient).toHaveBeenCalledWith({
-      baseUrl: "https://rickandmortyapi.com",
+      baseUrl: RICK_AND_MORTY_BASE_URL,
     });
   });
 
@@ -38,7 +42,7 @@ describe("fetchCharacters", () => {
       });
 
       await expect(fetchCharacters()).resolves.toEqual(characters);
-      expect(getMock).toHaveBeenCalledWith("/api/character", undefined, {
+      expect(getMock).toHaveBeenCalledWith(CHARACTERS_API_PATH, undefined, {
         signal: undefined,
       });
     });
@@ -52,7 +56,7 @@ describe("fetchCharacters", () => {
 
       await fetchCharacters(controller.signal);
 
-      expect(getMock).toHaveBeenCalledWith("/api/character", undefined, {
+      expect(getMock).toHaveBeenCalledWith(CHARACTERS_API_PATH, undefined, {
         signal: controller.signal,
       });
     });
