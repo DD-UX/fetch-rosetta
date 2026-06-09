@@ -1,10 +1,19 @@
 "use client";
 
-import type { ComponentPropsWithRef } from "react";
 import { useCharacters } from "../hooks/use-characters.hook";
-import { CharacterListView } from "@/features/common/components/CharacterListView";
+import {
+  CharacterListView,
+  type CharacterListViewProps,
+} from "@/features/common/components/CharacterListView";
 
-export type CharacterListProps = ComponentPropsWithRef<"div">;
+/**
+ * Passthrough props for a `CharacterList`: every `CharacterListView` prop except
+ * the data fields, which each strategy supplies itself (here from the hook).
+ */
+export type CharacterListProps = Omit<
+  CharacterListViewProps,
+  "status" | "characters" | "error"
+>;
 
 /**
  * Client Component for the CSR variant: drives the shared `CharacterListView`
