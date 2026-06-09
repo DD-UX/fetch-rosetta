@@ -15,10 +15,9 @@ import {
  * wiring the store to the view.
  */
 export function CharacterList(props: CharacterListViewElementProps) {
-  const status = useCharactersStore((state) => state.status);
-  const characters = useCharactersStore((state) => state.characters);
-  const error = useCharactersStore((state) => state.error);
-  const load = useCharactersStore((state) => state.load);
+  const { status, characters, error, load } = useCharactersStore(
+    (state) => state,
+  );
 
   useEffect(() => {
     const controller = new AbortController();
