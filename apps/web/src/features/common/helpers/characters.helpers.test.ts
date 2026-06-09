@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createHttpClient } from "@fetch-rosetta/sdk";
-import { fetchCharactersOnServer } from "./characters-server.helpers";
+import { fetchCharacters } from "./characters.helpers";
 import { makeCharacter } from "@/features/common/helpers/character.helpers";
 
 const { getMock } = vi.hoisted(() => ({ getMock: vi.fn() }));
@@ -18,7 +18,7 @@ vi.mock("@fetch-rosetta/sdk", async (importOriginal) => {
   };
 });
 
-describe("fetchCharactersOnServer", () => {
+describe("fetchCharacters", () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
@@ -37,8 +37,24 @@ describe("fetchCharactersOnServer", () => {
         results: characters,
       });
 
-      await expect(fetchCharactersOnServer()).resolves.toEqual(characters);
-      expect(getMock).toHaveBeenCalledWith("/api/character");
+      await expect(fetchCharacters()).resolves.toEqual(characters);
+      expect(getMock).toHaveBeenCalledWith("/api/character", undefined, {
+        signal: undefined,
+      });
+    });
+
+    it("forwards an abort signal to the SDK when one is provided", async () => {
+      getMock.mockResolvedValue({
+        info: { count: 0, pages: 1, next: null, prev: null },
+        results: [],
+      });
+      const controller = new AbortController();
+
+      await fetchCharacters(controller.signal);
+
+      expect(getMock).toHaveBeenCalledWith("/api/character", undefined, {
+        signal: controller.signal,
+      });
     });
   });
 
@@ -46,7 +62,7 @@ describe("fetchCharactersOnServer", () => {
     it("propagates the error when the request fails", async () => {
       getMock.mockRejectedValue(new Error("boom"));
 
-      await expect(fetchCharactersOnServer()).rejects.toThrow("boom");
+      await expect(fetchCharacters()).rejects.toThrow("boom");
     });
   });
 });

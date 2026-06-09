@@ -1,5 +1,5 @@
 import { REQUEST_STATUS } from "@fetch-rosetta/sdk";
-import { fetchCharactersOnServer } from "../helpers/characters-server.helpers";
+import { fetchCharacters } from "@/features/common/helpers/characters.helpers";
 import { CharacterListView } from "@/features/common/components/CharacterListView";
 
 /**
@@ -10,7 +10,7 @@ import { CharacterListView } from "@/features/common/components/CharacterListVie
  */
 export async function CharacterList() {
   try {
-    const characters = await fetchCharactersOnServer();
+    const characters = await fetchCharacters();
     return (
       <CharacterListView
         status={REQUEST_STATUS.success}
