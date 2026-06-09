@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { REQUEST_STATUS } from "@fetch-rosetta/sdk";
 import { CharacterListView } from "./CharacterListView";
-import { makeCharacter } from "@/features/csr-fetch/helpers/character.helpers";
+import { makeCharacter } from "../helpers/character.helpers";
 
 describe("CharacterListView", () => {
   describe("positive", () => {

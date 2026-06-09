@@ -4,7 +4,7 @@ import { REQUEST_STATUS } from "@fetch-rosetta/sdk";
 import { CharacterList } from "./CharacterList";
 import type { UseCharactersResult } from "../hooks/use-characters.hook";
 import { useCharacters } from "../hooks/use-characters.hook";
-import { makeCharacter } from "../helpers/character.helpers";
+import { makeCharacter } from "@/features/common/helpers/character.helpers";
 
 vi.mock("../hooks/use-characters.hook", () => ({
   useCharacters: vi.fn(),

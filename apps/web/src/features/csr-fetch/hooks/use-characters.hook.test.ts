@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { REQUEST_STATUS, type Character } from "@fetch-rosetta/sdk";
 import { useCharacters } from "./use-characters.hook";
 import { fetchCharacters } from "../helpers/characters-client.helpers";
-import { makeCharacter } from "../helpers/character.helpers";
+import { makeCharacter } from "@/features/common/helpers/character.helpers";
 
 vi.mock("../helpers/characters-client.helpers", () => ({
   fetchCharacters: vi.fn(),

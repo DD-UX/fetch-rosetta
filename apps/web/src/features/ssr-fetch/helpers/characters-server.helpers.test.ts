@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createHttpClient } from "@fetch-rosetta/sdk";
 import { fetchCharactersOnServer } from "./characters-server.helpers";
-import { makeCharacter } from "@/features/csr-fetch/helpers/character.helpers";
+import { makeCharacter } from "@/features/common/helpers/character.helpers";
 
 const { getMock } = vi.hoisted(() => ({ getMock: vi.fn() }));
 

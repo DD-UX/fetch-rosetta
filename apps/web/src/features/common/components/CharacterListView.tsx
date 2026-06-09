@@ -5,7 +5,7 @@ import {
   REQUEST_STATUS,
 } from "@fetch-rosetta/sdk";
 import { Alert, Skeleton, cn } from "@fetch-rosetta/ui-kit";
-import { CharacterCard } from "@/features/csr-fetch/components/CharacterCard";
+import { CharacterCard } from "./CharacterCard";
 
 export interface CharacterListViewProps extends ComponentPropsWithRef<"div"> {
   status: RequestStatus;

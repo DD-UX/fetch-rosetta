@@ -1,6 +1,6 @@
 import { REQUEST_STATUS } from "@fetch-rosetta/sdk";
 import { fetchCharactersOnServer } from "../helpers/characters-server.helpers";
-import { CharacterListView } from "./CharacterListView";
+import { CharacterListView } from "@/features/common/components/CharacterListView";
 
 /**
  * Server Component for the SSR variant: fetches characters during the request
