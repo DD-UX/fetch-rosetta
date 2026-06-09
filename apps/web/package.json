@@ -18,7 +18,8 @@
     "@fetch-rosetta/ui-kit": "workspace:*",
     "next": "^16.2.7",
     "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react-dom": "^19.2.7",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
