@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const charactersPayload = {
   info: { count: 2, pages: 1, next: null, prev: null },
@@ -39,13 +39,16 @@ test.describe("rosetta variants", () => {
     await page.goto("/rosetta");
   });
 
+  const csrCard = (page: Page) =>
+    page.getByRole("listitem").filter({ hasText: "CSR fetch" });
+
   test("lists the fetch variants with a live CSR card", async ({ page }) => {
     await expect(
       page.getByRole("heading", { level: 1, name: "Fetch variants" }),
     ).toBeVisible();
     await expect(page.getByText("CSR fetch")).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "Open variant" }),
+      csrCard(page).getByRole("link", { name: "Open variant" }),
     ).toBeVisible();
     await expect(page.getByText("Coming soon").first()).toBeVisible();
   });
@@ -57,7 +60,7 @@ test.describe("rosetta variants", () => {
       route.fulfill({ json: charactersPayload }),
     );
 
-    await page.getByRole("link", { name: "Open variant" }).click();
+    await csrCard(page).getByRole("link", { name: "Open variant" }).click();
 
     await expect(
       page.getByRole("heading", { level: 1, name: "CSR fetch" }),

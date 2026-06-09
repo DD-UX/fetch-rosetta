@@ -12,7 +12,7 @@ export const FETCH_VARIANTS: readonly FetchVariant[] = [
     id: "ssr-fetch",
     label: "SSR fetch",
     description: "Request-time fetch in a Server Component, rendered to HTML.",
-    available: false,
+    available: true,
   },
   {
     id: "csr-fetch",

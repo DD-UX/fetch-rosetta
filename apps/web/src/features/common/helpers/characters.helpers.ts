@@ -3,21 +3,23 @@ import {
   type Character,
   type CharacterListResponse,
 } from "@fetch-rosetta/sdk";
-
-/**
- * Origin of the public Rick & Morty API. The path (`/api/character`) is passed
- * per-request so the SDK's `new URL(path, baseUrl)` keeps the `/api` segment.
- */
-const RICK_AND_MORTY_BASE_URL = "https://rickandmortyapi.com";
+import {
+  CHARACTERS_API_PATH,
+  RICK_AND_MORTY_BASE_URL,
+} from "../constants/characters.constants";
 
 const client = createHttpClient({ baseUrl: RICK_AND_MORTY_BASE_URL });
 
-/** Fetches the first page of characters from the Rick & Morty API. */
+/**
+ * Fetches the first page of characters from the Rick & Morty API. Works on the
+ * server (call without a signal) and on the client (pass an `AbortSignal` to
+ * make the request cancellable) — the signal is optional, never mandatory.
+ */
 export async function fetchCharacters(
   signal?: AbortSignal,
 ): Promise<Character[]> {
   const data = await client.get<CharacterListResponse>(
-    "/api/character",
+    CHARACTERS_API_PATH,
     undefined,
     { signal },
   );
