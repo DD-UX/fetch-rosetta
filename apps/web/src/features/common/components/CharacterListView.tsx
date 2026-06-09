@@ -7,7 +7,9 @@ import {
 import { Alert, Skeleton, cn } from "@fetch-rosetta/ui-kit";
 import { CharacterCard } from "./CharacterCard";
 
-export interface CharacterListViewProps extends ComponentPropsWithRef<"div"> {
+export interface CharacterListViewElementProps extends ComponentPropsWithRef<"div"> {}
+
+export interface CharacterListViewProps extends CharacterListViewElementProps {
   status: RequestStatus;
   characters: Character[];
   error?: Error | null;

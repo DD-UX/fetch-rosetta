@@ -3,17 +3,14 @@
 import { useCharacters } from "../hooks/use-characters.hook";
 import {
   CharacterListView,
-  type CharacterListViewProps,
+  type CharacterListViewElementProps,
 } from "@/features/common/components/CharacterListView";
 
 /**
- * Passthrough props for a `CharacterList`: every `CharacterListView` prop except
- * the data fields, which each strategy supplies itself (here from the hook).
+ * Passthrough props for a `CharacterList`: the view's element props only, since
+ * the data fields are supplied by each strategy itself (here from the hook).
  */
-export type CharacterListProps = Omit<
-  CharacterListViewProps,
-  "status" | "characters" | "error"
->;
+export type CharacterListProps = CharacterListViewElementProps;
 
 /**
  * Client Component for the CSR variant: drives the shared `CharacterListView`
