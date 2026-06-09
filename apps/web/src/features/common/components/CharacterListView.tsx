@@ -7,6 +7,12 @@ import {
 import { Alert, Skeleton, cn } from "@fetch-rosetta/ui-kit";
 import { CharacterCard } from "./CharacterCard";
 
+/**
+ * The element-level props the view forwards to its root `<div>`. Declared as an
+ * (empty) interface rather than a type alias so every props shape in the
+ * codebase stays an interface, and so consumers can name this passthrough
+ * surface directly (e.g. a `CharacterList` wrapper) instead of re-deriving it.
+ */
 export interface CharacterListViewElementProps extends ComponentPropsWithRef<"div"> {}
 
 export interface CharacterListViewProps extends CharacterListViewElementProps {
