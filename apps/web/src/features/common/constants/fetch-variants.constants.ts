@@ -31,7 +31,7 @@ export const FETCH_VARIANTS: readonly FetchVariant[] = [
     id: "zustand",
     label: "Zustand",
     description: "Hold server data in a lightweight external Zustand store.",
-    available: false,
+    available: true,
   },
   {
     id: "redux",
