@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createHttpClient } from "@fetch-rosetta/sdk";
+import { fetchCharacters } from "./characters.helpers";
 import {
   CHARACTERS_API_PATH,
   RICK_AND_MORTY_BASE_URL,
-  fetchCharacters,
-} from "./characters.helpers";
+} from "../constants/characters.constants";
 import { makeCharacter } from "@/features/common/helpers/character.helpers";
 
 const { getMock } = vi.hoisted(() => ({ getMock: vi.fn() }));
